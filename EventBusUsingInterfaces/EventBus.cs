@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Events {
 	public static class EventBus {
-		public static Action<string> ErrorLogger { get; set; }
 		public static Action<string> WarningLogger { get; set; }
+		public static Action<string> ErrorLogger { get; set; }
 
 		static EventBus() {
 			ErrorLogger = Console.Error.WriteLine;
 			WarningLogger = Console.WriteLine;
 		}
 
-		private static readonly Dictionary<Type, IEventHandlersList> eventsMap = new();
+		private static readonly Dictionary<Type, IEventHandlersList> eventsMap = new(8);
 
 		/// <summary>
 		/// Subscribes handler on the message of type T
@@ -39,12 +39,9 @@ namespace Events {
 		/// <exception cref="InvalidCastException">If doesn't successed to cast to message list by type T</exception>
 		public static void Unsubscribe<T>(T subscriber) where T: IEventHandler {
 			var subscriberType = typeof(T);
-			if (!TryGetHandlersList<T>(subscriberType, out var handlers)) {
-				WarningLogger("Doesn't contains");
-				return;
+			if (TryGetHandlersList<T>(subscriberType, out var handlers)) {
+				handlers.RemoveSubscriber(subscriber);
 			}
-			
-			handlers.RemoveSubscriber(subscriber);
 		}
 
 		/// <summary>
@@ -56,7 +53,7 @@ namespace Events {
 		public static void RaiseEvent<T>(Action<T> callback) where T : IEventHandler {
 			var subscriberType = typeof(T);
 			if (!TryGetHandlersList<T>(subscriberType, out var handlers)) {
-				WarningLogger("Doesn't contains");
+				WarningLogger(GetNotFoundMessage(subscriberType));
 				return;
 			}
 			
@@ -80,13 +77,13 @@ namespace Events {
 			if (!subscriberType.IsInterface) {
 				throw new ArgumentException(GetArgumentExceptionMessage(subscriberType));
 			}
-			
-			if (eventsMap.TryGetValue(subscriberType, out IEventHandlersList handlers)) {
-				handlers.ClearSubscribers();
-				return;
-			}
 
-			WarningLogger("Doesn't contains");
+			if (!eventsMap.TryGetValue(subscriberType, out IEventHandlersList handlers)) {
+				WarningLogger(GetNotFoundMessage(subscriberType));
+				return;
+			} 
+			
+			handlers.ClearSubscribers();
 		}
 
 		/// <summary>
@@ -116,6 +113,10 @@ namespace Events {
 
 			founded = null;
 			return false;
+		}
+
+		private static string GetNotFoundMessage(Type subscriberType) {
+			return $"No list of handlers found for type {subscriberType}";
 		}
 
 		private static string GetArgumentExceptionMessage(Type subscriberType) {

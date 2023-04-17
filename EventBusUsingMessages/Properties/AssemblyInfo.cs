@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EventBus")]
+[assembly: AssemblyTitle("EventBus_Option_2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EventBus")]
+[assembly: AssemblyProduct("EventBus_Option_2")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("E9B22976-1D82-44EF-84A7-960AFC7DBFB0")]
+[assembly: Guid("536BEBC2-22CF-49DF-AC27-B0FAF271FFB0")]
 
 // Version information for an assembly consists of the following four values:
 //

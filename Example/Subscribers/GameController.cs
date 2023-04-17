@@ -7,7 +7,7 @@ namespace Test.Subscribers {
 		
 		public GameController() {
 			// incorrect variant: 
-			// EventBus.Subscribe(this);
+			// EventBusUsingInterfaces.Subscribe(this);
 			// This will not show errors at the compilation stage, but an exception will be thrown in runtime,
 			// because the type of event (that is, the subscriber responding to the event) can only be an interface,
 			// and not a specific class.

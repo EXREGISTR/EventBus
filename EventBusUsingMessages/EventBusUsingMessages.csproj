@@ -4,15 +4,14 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{DCDE9527-03A4-41F5-AA20-6F76F54EE639}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <ProjectGuid>{536BEBC2-22CF-49DF-AC27-B0FAF271FFB0}</ProjectGuid>
+        <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Test</RootNamespace>
-        <AssemblyName>Example</AssemblyName>
+        <RootNamespace>EventBus_Option_2</RootNamespace>
+        <AssemblyName>EventBus_Option_2</AssemblyName>
         <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <LangVersion>8</LangVersion>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,18 +39,11 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Program.cs" />
+        <Compile Include="EventBus.cs" />
+        <Compile Include="EventHandlersList.cs" />
+        <Compile Include="IEventHandlersList.cs" />
+        <Compile Include="IMessage.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Subscribers\GameController.cs" />
-        <Compile Include="Subscribers\GameLogger.cs" />
-        <Compile Include="Subscribers\Interfaces\IMeowHandler.cs" />
-        <Compile Include="Subscribers\Interfaces\IPlayerDeadHandler.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\EventBusUsingInterfaces\EventBusUsingInterfaces.csproj">
-        <Project>{e9b22976-1d82-44ef-84a7-960afc7dbfb0}</Project>
-        <Name>EventBusUsingInterfaces</Name>
-      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

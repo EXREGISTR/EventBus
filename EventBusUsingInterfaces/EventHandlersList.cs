@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
 namespace Events {
-	internal class EventHandlersList<T> : IEventHandlersList where T: IEventHandler {
+	internal sealed class EventHandlersList<T> : IEventHandlersList where T: IEventHandler {
 		private readonly List<T> subscribers = new();
 
 		internal void AddSubscriber(T handler) {
 			if (subscribers.Contains(handler)) {
-				EventBus.WarningLogger("");
+				EventBus.WarningLogger($"Handler {handler.GetType()} already registered for event {typeof(T)}!");
 				return;
 			}
 			
