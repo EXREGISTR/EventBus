@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using EventBusByMessages;
+using EventsByMessages;
 using ExampleUsingMessages.Messages;
 
 namespace ExampleUsingMessages {

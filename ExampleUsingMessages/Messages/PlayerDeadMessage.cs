@@ -1,4 +1,4 @@
-﻿using EventBusByMessages;
+﻿using EventsByMessages;
 
 namespace ExampleUsingMessages.Messages {
 	public class PlayerDeadMessage : IMessage {

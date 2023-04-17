@@ -7,7 +7,7 @@
         <ProjectGuid>{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>EventBusInterfaces</RootNamespace>
+        <RootNamespace>Events</RootNamespace>
         <AssemblyName>EventBusUsingInterfaces</AssemblyName>
         <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>

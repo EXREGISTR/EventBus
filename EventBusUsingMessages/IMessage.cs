@@ -1,3 +1,3 @@
-﻿namespace EventBusByMessages {
+﻿namespace EventsByMessages {
 	public interface IMessage { }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace EventBusByMessages {
+namespace EventsByMessages {
 	internal sealed class EventHandlersList<T> : IEventHandlersList where T: IMessage {
 		private Action<T> listeners;
 		

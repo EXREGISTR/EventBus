@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventBusByMessages {
+namespace EventsByMessages {
 	public static class EventBus {
 		public static Action<string> WarningLogger { get; set; }
 		public static Action<string> ErrorLogger { get; set; }
