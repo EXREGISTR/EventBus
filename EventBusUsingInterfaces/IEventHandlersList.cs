@@ -1,5 +1,5 @@
 ﻿namespace Events {
 	internal interface IEventHandlersList {
-		internal void ClearSubscribers();
+		internal void Clear();
 	}
 }

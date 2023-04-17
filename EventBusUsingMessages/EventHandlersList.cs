@@ -26,6 +26,6 @@ namespace EventsByMessages {
 		}
 
 		internal void RemoveListener(Action<T> callback) => listeners -= callback;
-		void IEventHandlersList.ClearListeners() => listeners = null;
+		void IEventHandlersList.Clear() => listeners = null;
 	}
 }

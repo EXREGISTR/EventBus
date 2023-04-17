@@ -38,7 +38,7 @@ namespace EventsByMessages {
 			var messageType = typeof(T);
 
 			if (!TryGetHandlersList<T>(messageType, out var handlers)) {
-				WarningLogger($"Message {messageType} doesn't exist! Maybe you hasn't listeners for this message");
+				WarningLogger($"There are no subscribed handlers for message {messageType}");
 				return;
 			}
 			
@@ -47,13 +47,13 @@ namespace EventsByMessages {
 
 		public static void ClearHandlers<T>() where T: IMessage {
 			if (eventsMap.TryGetValue(typeof(T), out IEventHandlersList founded)) {
-				founded.ClearListeners();
+				founded.Clear();
 			}
 		}
 
 		public static void Reset() {
 			foreach (var handlersList in eventsMap.Values) {
-				handlersList.ClearListeners();
+				handlersList.Clear();
 			}
 			
 			eventsMap.Clear();

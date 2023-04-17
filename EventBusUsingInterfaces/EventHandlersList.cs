@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Events {
-	internal sealed class EventHandlersList<T> : IEventHandlersList where T: IEventHandler {
+	internal sealed class EventHandlersList<T> : IEventHandlersList, IEnumerable<T> where T: IEventHandler {
 		private readonly List<T> subscribers = new();
 
 		internal void AddSubscriber(T handler) {
@@ -15,7 +16,8 @@ namespace Events {
 
 		internal void RemoveSubscriber(T handler) => subscribers.Remove(handler);
 		
-		void IEventHandlersList.ClearSubscribers() => subscribers.Clear();
-		internal IEnumerable<T> GetAllSubscribers() => subscribers;
+		void IEventHandlersList.Clear() => subscribers.Clear();
+		public IEnumerator<T> GetEnumerator() => subscribers.GetEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 }

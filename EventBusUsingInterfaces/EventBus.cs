@@ -39,8 +39,8 @@ namespace Events {
 		/// <exception cref="InvalidCastException">If doesn't successed to cast to handlers list by type T</exception>
 		public static void Unsubscribe<T>(T subscriber) where T: IEventHandler {
 			var subscriberType = typeof(T);
-			if (TryGetHandlersList<T>(subscriberType, out var handlers)) {
-				handlers.RemoveSubscriber(subscriber);
+			if (TryGetHandlersList<T>(subscriberType, out var handlersList)) {
+				handlersList.RemoveSubscriber(subscriber);
 			}
 		}
 
@@ -53,11 +53,11 @@ namespace Events {
 		public static void RaiseEvent<T>(Action<T> callback) where T : IEventHandler {
 			var subscriberType = typeof(T);
 			if (!TryGetHandlersList<T>(subscriberType, out var handlers)) {
-				WarningLogger(GetNotFoundMessage(subscriberType));
+				WarningLogger($"No list of handlers found for subscriber type {subscriberType}");
 				return;
 			}
 			
-			foreach (var subscriber in handlers.GetAllSubscribers()) {
+			foreach (var subscriber in handlers) {
 				try {
 					callback.Invoke(subscriber);
 				} catch (Exception e) {
@@ -75,23 +75,20 @@ namespace Events {
 			var subscriberType = typeof(T);
 			
 			if (!subscriberType.IsInterface) {
-				throw new ArgumentException(GetArgumentExceptionMessage(subscriberType));
+				throw new ArgumentException(GetIncorrectTypeMessage(subscriberType));
 			}
-
-			if (!eventsMap.TryGetValue(subscriberType, out IEventHandlersList handlers)) {
-				WarningLogger(GetNotFoundMessage(subscriberType));
-				return;
-			} 
 			
-			handlers.ClearSubscribers();
+			if (eventsMap.TryGetValue(subscriberType, out IEventHandlersList handlers)) {
+				handlers.Clear();
+			}
 		}
-
+		
 		/// <summary>
 		/// Clears subscribers on all events
 		/// </summary>
 		public static void Reset() {
 			foreach (var handlers in eventsMap.Values) {
-				handlers.ClearSubscribers();
+				handlers.Clear();
 			}
 			
 			eventsMap.Clear();
@@ -99,7 +96,7 @@ namespace Events {
 		
 		private static bool TryGetHandlersList<T>(Type subscriberType, out EventHandlersList<T> founded) where T : IEventHandler {
 			if (!subscriberType.IsInterface) {
-				throw new ArgumentException(GetArgumentExceptionMessage(subscriberType));
+				throw new ArgumentException(GetIncorrectTypeMessage(subscriberType));
 			}
 
 			if (eventsMap.TryGetValue(subscriberType, out IEventHandlersList list)) {
@@ -116,11 +113,7 @@ namespace Events {
 			return false;
 		}
 
-		private static string GetNotFoundMessage(Type subscriberType) {
-			return $"No list of handlers found for type {subscriberType}";
-		}
-
-		private static string GetArgumentExceptionMessage(Type subscriberType) {
+		private static string GetIncorrectTypeMessage(Type subscriberType) {
 			return $"It is not possible to register a handler for a handler type {subscriberType} that is not an interface";
 		}
 	}
