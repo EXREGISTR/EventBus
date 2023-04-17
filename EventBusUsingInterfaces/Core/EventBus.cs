@@ -14,7 +14,7 @@ namespace Events {
 		private static readonly Dictionary<Type, IEventHandlersList> eventsMap = new(8);
 
 		/// <summary>
-		/// Subscribes handler on the message of type T
+		/// Subscribes handler on the event of type T
 		/// </summary>
 		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
@@ -26,26 +26,26 @@ namespace Events {
 				return;
 			}
 			
-			var eventHandlers = new EventHandlersList<T>();
-			eventHandlers.AddSubscriber(subscriber);
-			eventsMap[subscriberType] = eventHandlers;
+			handlers = new EventHandlersList<T>();
+			handlers.AddSubscriber(subscriber);
+			eventsMap[subscriberType] = handlers;
 		}
 		
 		/// <summary>
-		/// Unsubscribes handler object of the message
+		/// Unsubscribes handler object of the event of type T
 		/// </summary>
 		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
 		/// <exception cref="InvalidCastException">If doesn't successed to cast to handlers list by type T</exception>
 		public static void Unsubscribe<T>(T subscriber) where T: IEventHandler {
 			var subscriberType = typeof(T);
-			if (TryGetHandlersList<T>(subscriberType, out var handlersList)) {
-				handlersList.RemoveSubscriber(subscriber);
+			if (TryGetHandlersList<T>(subscriberType, out var handlers)) {
+				handlers.RemoveSubscriber(subscriber);
 			}
 		}
 
 		/// <summary>
-		/// Raises event of message type
+		/// Raises event of the event of type T
 		/// </summary>
 		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
@@ -67,7 +67,7 @@ namespace Events {
 		}
 
 		/// <summary>
-		/// Clear subscribers for type T handler
+		/// Clear subscribers for event of type T
 		/// </summary>
 		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
@@ -93,8 +93,9 @@ namespace Events {
 			
 			eventsMap.Clear();
 		}
-		
-		private static bool TryGetHandlersList<T>(Type subscriberType, out EventHandlersList<T> founded) where T : IEventHandler {
+
+		private static bool TryGetHandlersList<T>(Type subscriberType, out EventHandlersList<T> founded)
+			where T : IEventHandler {
 			if (!subscriberType.IsInterface) {
 				throw new ArgumentException(GetIncorrectTypeMessage(subscriberType));
 			}

@@ -39,10 +39,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="EventHandlersList.cs" />
-        <Compile Include="IEventHandlersList.cs" />
-        <Compile Include="EventBus.cs" />
-        <Compile Include="IEventHandler.cs" />
+        <Compile Include="Core\EventBus.cs" />
+        <Compile Include="Core\EventHandlersList.cs" />
+        <Compile Include="Core\IEventHandler.cs" />
+        <Compile Include="Core\IEventHandlersList.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

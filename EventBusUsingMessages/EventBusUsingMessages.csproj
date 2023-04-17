@@ -8,7 +8,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>EventsByMessages</RootNamespace>
-        <AssemblyName>EventBus_Option_2</AssemblyName>
+        <AssemblyName>EventsByMessages</AssemblyName>
         <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>9</LangVersion>
@@ -39,10 +39,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="EventBus.cs" />
-        <Compile Include="EventHandlersList.cs" />
-        <Compile Include="IEventHandlersList.cs" />
-        <Compile Include="IMessage.cs" />
+        <Compile Include="Core\EventBus.cs" />
+        <Compile Include="Core\EventHandlersList.cs" />
+        <Compile Include="Core\IEventHandlersList.cs" />
+        <Compile Include="Core\IMessage.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
