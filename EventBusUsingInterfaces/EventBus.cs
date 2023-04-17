@@ -16,9 +16,9 @@ namespace Events {
 		/// <summary>
 		/// Subscribes handler on the message of type T
 		/// </summary>
-		/// <typeparam name="T">Type of message. Should be interface</typeparam>
+		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
-		/// <exception cref="InvalidCastException">If doesn't successed to cast to message list by type T</exception>
+		/// <exception cref="InvalidCastException">If doesn't successed to cast to handlers list by type T</exception>
 		public static void Subscribe<T>(T subscriber) where T : IEventHandler {
 			var subscriberType = typeof(T);
 			if (TryGetHandlersList<T>(subscriberType, out var handlers)) {
@@ -34,9 +34,9 @@ namespace Events {
 		/// <summary>
 		/// Unsubscribes handler object of the message
 		/// </summary>
-		/// <typeparam name="T">Type of message. Should be interface</typeparam>
+		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
-		/// <exception cref="InvalidCastException">If doesn't successed to cast to message list by type T</exception>
+		/// <exception cref="InvalidCastException">If doesn't successed to cast to handlers list by type T</exception>
 		public static void Unsubscribe<T>(T subscriber) where T: IEventHandler {
 			var subscriberType = typeof(T);
 			if (TryGetHandlersList<T>(subscriberType, out var handlers)) {
@@ -47,9 +47,9 @@ namespace Events {
 		/// <summary>
 		/// Raises event of message type
 		/// </summary>
-		/// <typeparam name="T">Type of message. Should be interface</typeparam>
+		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
-		/// <exception cref="InvalidCastException">If doesn't successed to cast to message list by type T</exception>
+		/// <exception cref="InvalidCastException">If doesn't successed to cast to handlers list by type T</exception>
 		public static void RaiseEvent<T>(Action<T> callback) where T : IEventHandler {
 			var subscriberType = typeof(T);
 			if (!TryGetHandlersList<T>(subscriberType, out var handlers)) {
@@ -67,9 +67,9 @@ namespace Events {
 		}
 
 		/// <summary>
-		/// Clear subscribers for type T message handler
+		/// Clear subscribers for type T handler
 		/// </summary>
-		/// <typeparam name="T">Type of message handler. Should be interface</typeparam>
+		/// <typeparam name="T">Type of event handler. Should be interface</typeparam>
 		/// <exception cref="ArgumentException">If type parameter T is not interface</exception>
 		public static void ClearSubscribers<T>() where T : IEventHandler {
 			var subscriberType = typeof(T);
@@ -104,7 +104,8 @@ namespace Events {
 
 			if (eventsMap.TryGetValue(subscriberType, out IEventHandlersList list)) {
 				if (list is not EventHandlersList<T> handlers) {
-					throw new InvalidCastException(GetCastExceptionMessage(list, typeof(EventHandlersList<T>)));
+					throw new InvalidCastException(
+						$"Failed to convert type {list.GetType()} to type {typeof(EventHandlersList<T>)}");
 				}
 
 				founded = handlers;
@@ -121,10 +122,6 @@ namespace Events {
 
 		private static string GetArgumentExceptionMessage(Type subscriberType) {
 			return $"It is not possible to register a handler for a handler type {subscriberType} that is not an interface";
-		}
-		
-		private static string GetCastExceptionMessage(IEventHandlersList handlers, Type endType) {
-			return $"Failed to convert type {handlers.GetType()} to type {endType}";
 		}
 	}
 }
