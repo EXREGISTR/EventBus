@@ -4,14 +4,15 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}</ProjectGuid>
-        <OutputType>Library</OutputType>
+        <ProjectGuid>{DCDE9527-03A4-41F5-AA20-6F76F54EE639}</ProjectGuid>
+        <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>EventBusInterfaces</RootNamespace>
-        <AssemblyName>EventBusInterfaces</AssemblyName>
+        <RootNamespace>Test</RootNamespace>
+        <AssemblyName>Example</AssemblyName>
         <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <LangVersion>9</LangVersion>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <LangVersion>8</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,11 +40,18 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="EventHandlersList.cs" />
-        <Compile Include="IEventHandlersList.cs" />
-        <Compile Include="EventBus.cs" />
-        <Compile Include="IEventHandler.cs" />
+        <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Subscribers\GameController.cs" />
+        <Compile Include="Subscribers\GameLogger.cs" />
+        <Compile Include="Subscribers\Interfaces\IMeowHandler.cs" />
+        <Compile Include="Subscribers\Interfaces\IPlayerDeadHandler.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\EventBus\EventBus.csproj">
+        <Project>{e9b22976-1d82-44ef-84a7-960afc7dbfb0}</Project>
+        <Name>EventBus</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

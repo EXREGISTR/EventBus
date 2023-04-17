@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EventBusInterfaces {
+namespace Events {
 	public static class EventBus {
 		public static Action<string> ErrorLogger { get; set; }
 		public static Action<string> WarningLogger { get; set; }
@@ -25,7 +25,7 @@ namespace EventBusInterfaces {
 				handlers.AddSubscriber(subscriber);
 				return;
 			}
-
+			
 			var eventHandlers = new EventHandlersList<T>();
 			eventHandlers.AddSubscriber(subscriber);
 			eventsMap[subscriberType] = eventHandlers;

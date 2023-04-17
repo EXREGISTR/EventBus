@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EventBusInterfaces {
+namespace Events {
 	internal class EventHandlersList<T> : IEventHandlersList where T: IEventHandler {
 		private readonly List<T> subscribers = new();
 

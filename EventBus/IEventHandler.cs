@@ -1,3 +1,3 @@
-﻿namespace EventBusInterfaces {
+﻿namespace Events {
 	public interface IEventHandler { }
 }
