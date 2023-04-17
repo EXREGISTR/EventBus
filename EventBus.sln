@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBusInterfaces", "EventBusInterfaces\EventBusInterfaces.csproj", "{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{DCDE9527-03A4-41F5-AA20-6F76F54EE639}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9B22976-1D82-44EF-84A7-960AFC7DBFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDE9527-03A4-41F5-AA20-6F76F54EE639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDE9527-03A4-41F5-AA20-6F76F54EE639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDE9527-03A4-41F5-AA20-6F76F54EE639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDE9527-03A4-41F5-AA20-6F76F54EE639}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
