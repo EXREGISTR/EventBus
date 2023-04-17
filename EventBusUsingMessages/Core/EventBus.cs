@@ -21,9 +21,9 @@ namespace EventsByMessages {
 				return;
 			}
 
-			var eventHandler = new EventHandlersList<T>();
-			eventsMap[messageType] = eventHandler;
-			eventHandler.AddListener(callback);
+			handlers = new EventHandlersList<T>();
+			eventsMap[messageType] = handlers;
+			handlers.AddListener(callback);
 		}
 		
 		public static void Unsubscribe<T>(Action<T> callback) where T: IMessage {

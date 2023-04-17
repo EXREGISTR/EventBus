@@ -16,8 +16,9 @@ namespace Events {
 
 		internal void RemoveSubscriber(T handler) => subscribers.Remove(handler);
 		
-		void IEventHandlersList.Clear() => subscribers.Clear();
 		public IEnumerator<T> GetEnumerator() => subscribers.GetEnumerator();
+		
+		void IEventHandlersList.Clear() => subscribers.Clear();
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 }
